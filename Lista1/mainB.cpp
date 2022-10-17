@@ -1,4 +1,4 @@
-#include "classes/Vector3D/Vector3D.cpp"
+#include "classes/Vector3D/Vector3D.h"
 #include <iostream>
 #include <stdlib.h>
 
