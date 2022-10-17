@@ -32,6 +32,8 @@ int main() {
 
     volume = abs(a->vectorProduct(*b).scalarProduct(*c));
     std::cout << "Volume: " << volume << std::endl;
+    delete a, b, c;
+    delete points;
     
     return 0;
 }

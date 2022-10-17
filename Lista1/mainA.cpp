@@ -1,4 +1,4 @@
-#include "classes/Point3D/Point3D.cpp"
+#include "classes/Point3D/Point3D.h"
 #include <iostream>
 
 int main() {

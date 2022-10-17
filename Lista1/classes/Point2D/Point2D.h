@@ -5,7 +5,7 @@
 
 // Point2D class to create 2D points on X,Y coordinates
 class Point2D {
-    private:
+    protected:
         int x;
         int y;
     public:

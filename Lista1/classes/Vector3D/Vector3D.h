@@ -1,7 +1,7 @@
 #ifndef VECTOR_3D_H
 #define VECTOR_3D_H
 
-#include "../Point3D/Point3D.cpp"
+#include "../Point3D/Point3D.h"
 
 // Vector class to create 3D vectors
 class Vector3D {

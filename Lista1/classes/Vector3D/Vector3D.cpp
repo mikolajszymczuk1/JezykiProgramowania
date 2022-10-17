@@ -43,15 +43,15 @@ int Vector3D::scalarProduct(Vector3D vectorToProd) {
 
 // Return vector that is sum of two vectors
 Vector3D Vector3D::addVector(Vector3D vectorToAdd) {
-    return *new Vector3D(x + vectorToAdd.getX(), y + vectorToAdd.getY(), z + vectorToAdd.getZ());
+    return Vector3D(x + vectorToAdd.getX(), y + vectorToAdd.getY(), z + vectorToAdd.getZ());
 }
 
 // Return vector that is difference of two vectors
 Vector3D Vector3D::subVector(Vector3D vectorToSub) {
-    return *new Vector3D(x - vectorToSub.getX(), y - vectorToSub.getY(), z - vectorToSub.getZ());
+    return Vector3D(x - vectorToSub.getX(), y - vectorToSub.getY(), z - vectorToSub.getZ());
 }
 
 // Return vector product of two vectors
 Vector3D Vector3D::vectorProduct(Vector3D vectorToProd) {
-    return *new Vector3D((y * vectorToProd.getZ()) - (z * vectorToProd.getY()), -(x * vectorToProd.getZ() - z * vectorToProd.getX()), (x * vectorToProd.getY()) - (y * vectorToProd.getX()));
+    return Vector3D((y * vectorToProd.getZ()) - (z * vectorToProd.getY()), -(x * vectorToProd.getZ() - z * vectorToProd.getX()), (x * vectorToProd.getY()) - (y * vectorToProd.getX()));
 }
