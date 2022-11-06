@@ -4,18 +4,18 @@
 Point2D::Point2D() {}
 
 // Create point 2D
-Point2D::Point2D(int posX, int posY) {
+Point2D::Point2D(float posX, float posY) {
     x = posX;
     y = posY;
 }
 
 // Return position X of point 2D
-int Point2D::getX() {
+float Point2D::getX() {
     return x;
 }
 
 // Return position Y of point 2D
-int Point2D::getY() {
+float Point2D::getY() {
     return y;
 }
 
@@ -24,4 +24,15 @@ void Point2D::printPoint() {
     std::cout << "Point 2D" << std::endl;
     std::cout << "X = " << getX() << std::endl;
     std::cout << "Y = " << getY() << std::endl;
+}
+
+// Check if line equation is satisfied
+bool Point2D::isLineEquationSatisfied(Point2D pointA, Point2D pointB, Point2D pointC) {
+    float result = ((pointC.getY() - pointA.getY()) * (pointB.getX() - pointA.getX())) - ((pointB.getY() - pointA.getY()) * (pointC.getX() - pointA.getX()));
+    std::cout << result << std::endl;
+    if (result == 0) {
+        return true;
+    }
+
+    return false;
 }

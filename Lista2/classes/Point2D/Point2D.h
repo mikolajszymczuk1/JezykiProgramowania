@@ -6,14 +6,15 @@
 // Point2D class to create 2D points on X,Y coordinates
 class Point2D {
     protected:
-        int x;
-        int y;
+        float x;
+        float y;
     public:
         Point2D();
-        Point2D(int posX, int posY);
-        int getX();
-        int getY();
+        Point2D(float posX, float posY);
+        float getX();
+        float getY();
         void printPoint();
+        static bool isLineEquationSatisfied(Point2D pointA, Point2D pointB, Point2D pointC);
 };
 
 #endif
