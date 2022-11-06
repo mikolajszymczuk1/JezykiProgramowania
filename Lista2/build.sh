@@ -25,6 +25,7 @@ echo "Start compiling important modules ..."
 g++ -c classes/Point2D/Point2D.cpp -o out/Point2D.o
 g++ -c classes/Point3D/Point3D.cpp -o out/Point3D.o
 g++ -c classes/Vector3D/Vector3D.cpp -o out/Vector3D.o
+g++ -c classes/PointsFileManager/PointsFileManager.cpp -o out/PointsFileManager.o
 
 echo "Done !"
 
@@ -40,7 +41,7 @@ echo "Done !"
 
 echo "Building final programs ..."
 
-g++ out/Point2D.o out/Point3D.o out/Vector3D.o out/main.o -o out/main
+g++ out/Point2D.o out/Point3D.o out/Vector3D.o out/PointsFileManager.o out/main.o -o out/main
 
 echo "Done !"
 echo "Build complete !"
