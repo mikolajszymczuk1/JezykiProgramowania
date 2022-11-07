@@ -91,5 +91,19 @@ Point2D PointsFileManager::create2dPoint(std::string line) {
 
 // Create 3D point based on string line from file
 Point3D PointsFileManager::create3dPoint(std::string line) {
-    return Point3D(0, 0, 0);
+    int semiIndexA = 0;
+    int semiIndexB = 0;
+
+    for (int i = 0; i < line.length(); i++) {
+        if (line[i] == ';' && semiIndexA == 0) {
+            semiIndexA = i;
+        } else if (line[i] == ';' && semiIndexB == 0) {
+            semiIndexB = i;
+        }
+    }
+
+    float x = std::stof(line.substr(0, semiIndexA));
+    float y = std::stof(line.substr(semiIndexA + 1, semiIndexB));
+    float z = std::stof(line.substr(semiIndexB + 1, line.length() - 1));
+    return Point3D(x, y, z);
 }

@@ -28,9 +28,7 @@ void Point2D::printPoint() {
 
 // Check if line equation is satisfied
 bool Point2D::isLineEquationSatisfied(Point2D pointA, Point2D pointB, Point2D pointC) {
-    float result = ((pointC.getY() - pointA.getY()) * (pointB.getX() - pointA.getX())) - ((pointB.getY() - pointA.getY()) * (pointC.getX() - pointA.getX()));
-    std::cout << result << std::endl;
-    if (result == 0) {
+    if (((pointC.getY() - pointA.getY()) * (pointB.getX() - pointA.getX())) - ((pointB.getY() - pointA.getY()) * (pointC.getX() - pointA.getX())) == 0) {
         return true;
     }
 

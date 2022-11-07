@@ -8,14 +8,15 @@ class Vector3D;
 // Point3D class to create 3D points on X,Y,Z coordinates
 class Point3D : public Point2D {
     private:
-        int z;
+        float z;
     public:
         Point3D();
-        Point3D(int posX, int posY, int posZ);
-        int getZ();
+        Point3D(float posX, float posY, float posZ);
+        float getZ();
         void printPoint();
-        Point2D projectingToPoint2D(int z0, int d);
+        Point2D projectingToPoint2D(float z0, float d);
         void moveByVector(Vector3D vectorToMoveBy);
+        static bool isStraightEquationSatisfied(Point3D pointA, Point3D pointB, Point3D pointC);
 };
 
 #endif

@@ -5,8 +5,13 @@
 
 echo "Clear out dir ..."
 
-oFiles=out/*.o
+outDirectory=out
+oFiles="$outDirectory"/*.o
 mainPath=out/main
+
+if [ ! -d "$outDirectory" ]; then
+    mkdir "$outDirectory"
+fi
 
 if [ -f "$oFile" ]; then
     rm "$oFiles"
