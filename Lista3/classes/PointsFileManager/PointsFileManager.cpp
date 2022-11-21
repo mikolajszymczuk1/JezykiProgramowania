@@ -17,9 +17,15 @@ int PointsFileManager::getSize() {
     clearFlag();
     int count = 0;
     std::string line;
-    while (dataFile->peek() != EOF) {
-        std::getline(*dataFile, line);
-        count++;
+
+    try {
+        if (dataFile->fail()) throw path;
+        while (dataFile->peek() != EOF) {
+            std::getline(*dataFile, line);
+            count++;
+        }
+    } catch (std::string e) {
+        std::cout << "Problem with reading data from file: " << e;
     }
 
     return count;
@@ -49,10 +55,16 @@ void PointsFileManager::createPoints(Point2D *pointsArray, int size) {
     clearFlag();
     std::string line;
     int i = 0;
-    while (std::getline(*dataFile, line)) {
-        Point2D newPoint = create2dPoint(line);
-        pointsArray[i] = newPoint;
-        i++;
+
+    try {
+        if (dataFile->fail()) throw path;
+        while (std::getline(*dataFile, line)) {
+            Point2D newPoint = create2dPoint(line);
+            pointsArray[i] = newPoint;
+            i++;
+        }
+    } catch (std::string e) {
+        std::cout << "Cant read data from file: " << e;
     }
 }
 
@@ -61,10 +73,16 @@ void PointsFileManager::createPoints(Point3D *pointsArray, int size) {
     clearFlag();
     std::string line;
     int i = 0;
-    while (std::getline(*dataFile, line)) {
-        Point3D newPoint = create3dPoint(line);
-        pointsArray[i] = newPoint;
-        i++;
+
+    try {
+        if (dataFile->fail()) throw path;
+        while (std::getline(*dataFile, line)) {
+            Point3D newPoint = create3dPoint(line);
+            pointsArray[i] = newPoint;
+            i++;
+        }
+    } catch (std::string e) {
+        std::cout << "Cant read data from file: " << e;
     }
 }
 
