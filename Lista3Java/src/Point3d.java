@@ -35,7 +35,7 @@ public class Point3d extends Point2d {
      * @return   Point2d
      */
     public Point2d projectingToPoint2d(float z0, float d) {
-        if ((z0 - this.z) == 0) return new Point2d(0, 0);
+        if ((z0 - this.z) == 0) throw new ArithmeticException("Divide by 0");
         float x2 = (z0 * this.x - this.z * d) / (z0 - this.z);
         float y2 = (z0 * this.y) / (z0 - this.z);
         return new Point2d(x2, y2);
@@ -60,6 +60,7 @@ public class Point3d extends Point2d {
      */
     public static boolean isStraightEquationSatisfied(Point3d pointA, Point3d pointB, Point3d pointC) {
         Vector3d a = new Vector3d(pointA, pointB);
+        if (a.getX() == 0 || a.getY() == 0 || a.getZ() == 0) throw new ArithmeticException("Divide by 0");
         return (((pointC.getX() - pointA.getX()) / a.getX()) == (pointC.getY() - pointA.getY()) / a.getY()) && (((pointC.getY() - pointA.getY()) / a.getY()) == (pointC.getZ() - pointA.getZ()) / a.getZ());
     }
 }

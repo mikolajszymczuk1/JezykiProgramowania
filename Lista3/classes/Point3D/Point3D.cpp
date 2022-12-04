@@ -24,7 +24,7 @@ void Point3D::printPoint() {
 
 // Projection on point 2D from point 3D
 Point2D Point3D::projectingToPoint2D(float z0, float d) {
-    if ((z0 - getZ()) == 0) return Point2D(0, 0);
+    if (z0 - getZ() == 0) throw "Divide by 0 !";
     float x2 = (z0 * getX() - getZ() * d) / (z0 - getZ());
     float y2 = (z0 * getY()) / (z0 - getZ());
     return Point2D(x2, y2);
@@ -40,11 +40,8 @@ void Point3D::moveByVector(Vector3D vectorToMoveBy) {
 // Check if 3D points are on the same straight
 bool Point3D::isStraightEquationSatisfied(Point3D pointA, Point3D pointB, Point3D pointC) {
     Vector3D *a = new Vector3D(pointA, pointB);  // AB
-    if ((((pointC.getX() - pointA.getX()) / a->getX()) == (pointC.getY() - pointA.getY()) / a->getY()) && (((pointC.getY() - pointA.getY()) / a->getY()) == (pointC.getZ() - pointA.getZ()) / a->getZ())) {
-        return true;
-    }
-    
-    return false;
+    if (a->getX() == 0 || a->getY() == 0 || a->getZ() == 0) throw "Divide by 0";
+    return ((((pointC.getX() - pointA.getX()) / a->getX()) == (pointC.getY() - pointA.getY()) / a->getY()) && (((pointC.getY() - pointA.getY()) / a->getY()) == (pointC.getZ() - pointA.getZ()) / a->getZ()));
 }
 
 // Overload operator <

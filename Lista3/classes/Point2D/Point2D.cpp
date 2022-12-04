@@ -28,11 +28,7 @@ void Point2D::printPoint() {
 
 // Check if line equation is satisfied
 bool Point2D::isLineEquationSatisfied(Point2D pointA, Point2D pointB, Point2D pointC) {
-    if (((pointC.getY() - pointA.getY()) * (pointB.getX() - pointA.getX())) - ((pointB.getY() - pointA.getY()) * (pointC.getX() - pointA.getX())) == 0) {
-        return true;
-    }
-
-    return false;
+    return (((pointC.getY() - pointA.getY()) * (pointB.getX() - pointA.getX())) - ((pointB.getY() - pointA.getY()) * (pointC.getX() - pointA.getX())) == 0);
 }
 
 // Overload compare operator <

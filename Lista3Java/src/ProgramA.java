@@ -30,12 +30,17 @@ public class ProgramA {
             e.printStackTrace();
         }
 
-        for (int i = 2; i < points2d.size(); i++) {
-            if (!Point2d.isLineEquationSatisfied(points2d.get(0), points2d.get(1), points2d.get(i))) {
-                System.out.println("----------- FAIL");
-                points2d.get(i).printPoint();
-                System.out.println("-----------\n");
+        try {
+            for (int i = 2; i < points2d.size(); i++) {
+                if (!Point2d.isLineEquationSatisfied(points2d.get(0), points2d.get(1), points2d.get(i))) {
+                    System.out.println("----------- FAIL");
+                    points2d.get(i).printPoint();
+                    System.out.println("-----------\n");
+                }
             }
+        } catch (ArithmeticException e) {
+            System.out.print(e.getMessage());
         }
+
     }
 }
