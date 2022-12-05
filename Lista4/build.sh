@@ -30,7 +30,7 @@ echo "Start compiling important modules ..."
 g++ -c classes/Point2D/Point2D.cpp -o out/Point2D.o
 g++ -c classes/Point3D/Point3D.cpp -o out/Point3D.o
 g++ -c classes/Vector3D/Vector3D.cpp -o out/Vector3D.o
-g++ -c classes/StringOfPoints2D/StringOfPoints2D.cpp -o out/StringOfPoints2D.o
+g++ -c classes/StringOfPoints/StringOfPoints.cpp -o out/StringOfPoints.o
 
 echo "Done !"
 

@@ -18,6 +18,7 @@ class Point3D : public Point2D {
         void moveByVector(Vector3D vectorToMoveBy);
         static bool isStraightEquationSatisfied(Point3D pointA, Point3D pointB, Point3D pointC);
         bool operator<(const Point3D &pointToCompare);
+        bool operator==(const Point3D &pointToEqual);
 };
 
 #endif

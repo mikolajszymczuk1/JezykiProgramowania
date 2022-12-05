@@ -35,3 +35,8 @@ bool Point2D::isLineEquationSatisfied(Point2D pointA, Point2D pointB, Point2D po
 bool Point2D::operator<(const Point2D &pointToCompare) {
     return (pointToCompare.x > x && pointToCompare.y > y);
 }
+
+// Overload equal operator ==
+bool Point2D::operator==(const Point2D &pointToEqual) {
+    return (x == pointToEqual.x && y && pointToEqual.y);
+}
