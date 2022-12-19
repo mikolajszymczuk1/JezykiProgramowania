@@ -45,8 +45,10 @@ bool Point3D::isStraightEquationSatisfied(Point3D pointA, Point3D pointB, Point3
 }
 
 // Overload operator <
-bool Point3D::operator<(const Point3D &pointToCompare) {
-    return (pointToCompare.x > x && pointToCompare.y > y && pointToCompare.z > z);
+bool Point3D::operator<(const Point3D &pointToCompare) const {
+    return ((pointToCompare.x > x || pointToCompare.y > y || pointToCompare.z > z) ||
+    (pointToCompare.x == x && pointToCompare.y > y && pointToCompare.z > z) ||
+    (pointToCompare.x == x && pointToCompare.y == y && pointToCompare.z > z));
 }
 
 // Overload operator ==

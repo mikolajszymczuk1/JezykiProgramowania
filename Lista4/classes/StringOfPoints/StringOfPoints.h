@@ -2,7 +2,6 @@
 #define STRING_OF_POINTS_H
 
 #include <vector>
-#include "../Point2D/Point2D.h"
 
 template <class T>
 class StringOfPoints {
@@ -22,7 +21,7 @@ class StringOfPoints {
 
 // --------- Class definitions ---------
 
-/** Create empty vector set of Points 2D */
+/** Create empty vector set of Points */
 template <class T>
 StringOfPoints<T>::StringOfPoints() {
     pointsSet = new std::vector<T>;

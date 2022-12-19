@@ -15,8 +15,8 @@ class Point2D {
         float getY();
         void printPoint();
         static bool isLineEquationSatisfied(Point2D pointA, Point2D pointB, Point2D pointC);
-        bool operator<(const Point2D &pointToCompare);
-        bool operator==(const Point2D &pointToEqual);
+        bool operator<(const Point2D &pointToCompare) const;
+        bool operator==(const Point2D &pointToEqual) const;
 };
 
 #endif
