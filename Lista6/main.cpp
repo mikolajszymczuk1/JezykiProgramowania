@@ -12,6 +12,8 @@
 #include <QTimer>
 #include <QDebug>
 
+float to2dPoint(float xy, float z, float z0, float d);
+
 int main(int argc, char *argv[])
 {
     const int WIDTH = 400;
@@ -51,72 +53,6 @@ int main(int argc, char *argv[])
         }
     }
 
-    // Create button to rotate points
-    /*
-    QPushButton *rotateButton = new QPushButton("Rotate");
-    QObject::connect(rotateButton, &QPushButton::clicked, [&]() {
-        // Get rotate angles from user
-        bool ok;
-        float alpha = QInputDialog::getDouble(nullptr, "Rotation angles", "Alpha:", 0, -360, 360, 2, &ok);  // Alpha
-        if (!ok) return;
-
-        float beta = QInputDialog::getDouble(nullptr, "Rotation angles", "Beta:", 0, -360, 360, 2, &ok);  // Beta
-        if (!ok) return;
-
-        float gamma = QInputDialog::getDouble(nullptr, "Rotation angles", "Gamma:", 0, -360, 360, 2, &ok);  // Gamma
-        if (!ok) return;
-
-        // Get extra parameters
-        float z0 = QInputDialog::getDouble(nullptr, "Projection parameters", "z0:", 0, -1e9, 1e9, 2, &ok);
-        if (!ok) return;
-
-        float d = QInputDialog::getDouble(nullptr, "Projection parameters", "d:", 100, 0, 1e9, 2, &ok);
-        if (!ok) return;
-
-        // Rotate points
-        QMatrix4x4 rotation;
-        rotation.rotate(alpha, 1.0, 0.0, 0.0);
-        rotation.rotate(beta, 0.0, 1.0, 0.0);
-        rotation.rotate(gamma, 0.0, 0.0, 1.0);
-        for (QVector3D &point : points) {
-            point = rotation.map(point);
-        }
-
-        // Projection to 2D points
-        QVector<QPointF> leftPoints;
-        QVector<QPointF> rightPoints;
-        for (const QVector3D &point : points) {
-            float x = point.x() * d / (d - point.z() + z0);
-            float y = point.y() * d / (d - point.z() + z0);
-            if (point.z() + z0 > 0) {
-                rightPoints.append(QPointF(x, y));
-            } else {
-                leftPoints.append(QPointF(x, y));
-            }
-        }
-
-        scene.clear();
-
-        // Drawing the points of the left subset
-        int scale = 100;
-
-        for (const QPointF &point : leftPoints) {
-            QGraphicsEllipseItem *item = new QGraphicsEllipseItem(point.x() * scale, point.y() * scale, 4, 4);
-            item->setBrush(QBrush(Qt::cyan));
-            scene.addItem(item);
-        }
-
-        // Drawing the points of the right subset
-        for (const QPointF &point : rightPoints) {
-            QGraphicsEllipseItem *item = new QGraphicsEllipseItem(point.x() * scale, point.y() * scale, 4, 4);
-            item->setBrush(QBrush(Qt::red));
-            scene.addItem(item);
-        }
-
-        view.update();
-    });
-    */
-
     QTimer timer;
     QObject::connect(&timer, &QTimer::timeout, &view, [&] {
         // Get rotate angles from user
@@ -125,8 +61,8 @@ int main(int argc, char *argv[])
         float gamma = 0.5;
 
         // Get extra parameters
-        float z0 = 0.0;
-        float d = 100;
+        float z0 = 100;
+        float d = 1;
 
         // Rotate points
         QMatrix4x4 rotation;
@@ -141,20 +77,23 @@ int main(int argc, char *argv[])
         QVector<QPointF> leftPoints;
         QVector<QPointF> rightPoints;
         for (const QVector3D &point : points) {
-            float x = point.x() * d / (d - point.z() + z0);
-            float y = point.y() * d / (d - point.z() + z0);
-            if (point.z() + z0 > 0) {
-                rightPoints.append(QPointF(x, y));
-            } else {
-                leftPoints.append(QPointF(x, y));
-            }
+            float x = point.x();
+            float y = point.y();
+            float z = point.z();
+
+            float xLeft = to2dPoint(x, z, z0, d);
+            float yLeft = to2dPoint(y, z, z0, d);
+            float xRight = to2dPoint(x, z, z0, -d);
+            float yRight = to2dPoint(y, z, z0, -d);
+            rightPoints.append(QPointF(xLeft, yLeft));
+            leftPoints.append(QPointF(xRight, yRight));
         }
 
         // Clear scene before draw
         scene.clear();
 
         // Drawing the points of the left subset
-        int scale = 80;
+        int scale = 10000;
         for (const QPointF &point : leftPoints) {
             QGraphicsEllipseItem *item = new QGraphicsEllipseItem((point.x() * scale) + WIDTH / 2, (point.y() * scale) + HEIGHT / 2, 4, 4);
             item->setBrush(QBrush(Qt::cyan));
@@ -177,4 +116,8 @@ int main(int argc, char *argv[])
 
     view.show();
     return a.exec();
+}
+
+float to2dPoint(float xy, float z, float z0, float d) {
+    return xy * d / (d - z + z0);
 }
